@@ -5,11 +5,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
-@NoArgsConstructor @AllArgsConstructor @Getter @Setter
-public class Student {
+import static javax.persistence.GenerationType.SEQUENCE;
 
+@NoArgsConstructor @AllArgsConstructor @Getter @Setter @Entity @Table
+public class Student {
+    @Id
+    @SequenceGenerator(
+            name = "student_sequence",
+            sequenceName = "student_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "student_sequence"
+    )
     private Long id;
     private String name;
     private String email;
